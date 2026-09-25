@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Omnitegra Associates | All things, with integrity.</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navy: '#0B1B33',
+                        gold: '#C9A54B',
+                        'soft-gold': '#E4C97A',
+                        cream: '#F7F5F0',
+                        ink: '#1A1A1A',
+                        muted: '#6B7280',
+                    },
+                    fontFamily: {
+                        serif: ['Playfair Display', 'serif'],
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            background-color: #F7F5F0;
+            color: #1A1A1A;
+            font-family: 'Inter', sans-serif;
+        }
+        h1, h2, h3, h4, .font-serif {
+            font-family: 'Playfair Display', serif;
+        }
+        .gold-gradient {
+            background: linear-gradient(135deg, #C9A54B 0%, #E4C97A 100%);
+        }
+        .navy-gradient {
+            background: linear-gradient(135deg, #0B1B33 0%, #152c50 100%);
+        }
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #F7F5F0;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #C9A54B;
+            border-radius: 4px;
+        }
+        .view-transition {
+            animation: fadeIn 0.4s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="bg-cream text-ink antialiased selection:bg-gold selection:text-white flex flex-col min-h-screen">
+
+    <header class="sticky top-0 z-50 bg-navy/95 backdrop-blur-md border-b border-gold/20 text-cream transition-all duration-300 shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <!-- Brand Logo -->
+            <a href="#home" onclick="switchView('home')" class="flex items-center space-x-3 group">
+                <div class="w-10 h-10 rounded-lg gold-gradient flex items-center justify-center text-navy font-bold font-serif text-xl shadow-md group-hover:scale-105 transition-transform">
+                    O
+                </div>
+                <div class="flex flex-col">
+                    <span class="font-serif text-xl sm:text-2xl tracking-wider font-bold text-cream">OMNITEGRA</span>
+                    <span class="text-[10px] tracking-[0.2em] uppercase text-gold font-sans font-medium">Associates • Pune</span>
+                </div>
+            </a>
+
+            <!-- Desktop Navigation -->
+            <nav class="hidden lg:flex items-center space-x-8">
+                <button onclick="switchView('home')" data-nav="home" class="nav-link text-sm uppercase tracking-wider text-cream/90 hover:text-gold transition-colors font-medium py-2">Home</button>
+                <button onclick="switchView('about')" data-nav="about" class="nav-link text-sm uppercase tracking-wider text-cream/90 hover:text-gold transition-colors font-medium py-2">About Us</button>
+                <button onclick="switchView('services')" data-nav="services" class="nav-link text-sm uppercase tracking-wider text-cream/90 hover:text-gold transition-colors font-medium py-2">Services</button>
+                <button onclick="switchView('founders')" data-nav="founders" class="nav-link text-sm uppercase tracking-wider text-cream/90 hover:text-gold transition-colors font-medium py-2">Founders</button>
+                <button onclick="switchView('portfolio')" data-nav="portfolio" class="nav-link text-sm uppercase tracking-wider text-cream/90 hover:text-gold transition-colors font-medium py-2">Portfolio</button>
+                <button onclick="switchView('blog')" data-nav="blog" class="nav-link text-sm uppercase tracking-wider text-cream/90 hover:text-gold transition-colors font-medium py-2">Insights</button>
+            </nav>
+
+            <!-- CTA Button & Mobile Toggle -->
+            <div class="flex items-center space-x-4">
+                <button onclick="switchView('contact')" class="hidden sm:inline-flex items-center justify-center px-5 py-2.5 rounded-md gold-gradient text-navy font-semibold text-sm tracking-wider uppercase shadow-md hover:opacity-95 transition-all transform hover:-translate-y-0.5">
+                    Get in Touch
+                </button>
+                <button id="mobile-menu-btn" class="lg:hidden text-cream hover:text-gold p-2 text-2xl focus:outline-none" aria-label="Toggle menu">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation Menu -->
+        <div id="mobile-menu" class="hidden lg:hidden bg-navy border-t border-gold/10 px-6 pt-4 pb-6 space-y-3">
+            <button onclick="switchView('home'); toggleMobileMenu();" class="block w-full text-left text-sm uppercase tracking-wider text-cream/90 hover:text-gold py-2 font-medium">Home</button>
+            <button onclick="switchView('about'); toggleMobileMenu();" class="block w-full text-left text-sm uppercase tracking-wider text-cream/90 hover:text-gold py-2 font-medium">About Us</button>
+            <button onclick="switchView('services'); toggleMobileMenu();" class="block w-full text-left text-sm uppercase tracking-wider text-cream/90 hover:text-gold py-2 font-medium">Services</button>
+            <button onclick="switchView('founders'); toggleMobileMenu();" class="block w-full text-left text-sm uppercase tracking-wider text-cream/90 hover:text-gold py-2 font-medium">Founders</button>
+            <button onclick="switchView('portfolio'); toggleMobileMenu();" class="block w-full text-left text-sm uppercase tracking-wider text-cream/90 hover:text-gold py-2 font-medium">Portfolio</button>
+            <button onclick="switchView('blog'); toggleMobileMenu();" class="block w-full text-left text-sm uppercase tracking-wider text-cream/90 hover:text-gold py-2 font-medium">Insights</button>
+            <button onclick="switchView('contact'); toggleMobileMenu();" class="w-full mt-2 py-3 rounded-md gold-gradient text-navy font-semibold text-sm uppercase tracking-wider shadow-md text-center">
+                Get in Touch
+            </button>
+        </div>
+    </header>
+
+    <main id="app-container" class="flex-grow">
+        <!-- Views are dynamically loaded here -->
+    </main>
+
+    <footer class="bg-navy text-cream pt-16 pb-12 border-t border-gold/20 mt-auto">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
+                <!-- Column 1: Brand -->
+                <div class="space-y-4">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-8 h-8 rounded-lg gold-gradient flex items-center justify-center text-navy font-bold font-serif text-lg">
+                            O
+                        </div>
+                        <span class="font-serif text-xl tracking-wider font-bold">OMNITEGRA</span>
+                    </div>
+                    <p class="text-cream/70 text-sm leading-relaxed">
+                        All things, with integrity. Built on trust. Driven by value. Growing together from Pune, India to the world.
+                    </p>
+                    <div class="flex space-x-4 pt-2">
+                        <a href="mailto:omnitegra@proton.me" class="w-9 h-9 rounded-full bg-navy border border-gold/30 flex items-center justify-center text-gold hover:bg-gold hover:text-navy transition-all"><i class="fa-solid fa-envelope"></i></a>
+                        <a href="https://wa.me/919999999999" target="_blank" rel="noopener" class="w-9 h-9 rounded-full bg-navy border border-gold/30 flex items-center justify-center text-gold hover:bg-gold hover:text-navy transition-all"><i class="fa-brands fa-whatsapp"></i></a>
+                    </div>
+                </div>
+
+                <!-- Column 2: Quick Links -->
+                <div>
+                    <h4 class="font-serif text-gold text-lg mb-4 font-semibold">Quick Navigation</h4>
+                    <ul class="space-y-2.5 text-sm text-cream/80">
+                        <li><button onclick="switchView('home')" class="hover:text-gold transition-colors">Home</button></li>
+                        <li><button onclick="switchView('about')" class="hover:text-gold transition-colors">About Us</button></li>
+                        <li><button onclick="switchView('services')" class="hover:text-gold transition-colors">Our Services</button></li>
+                        <li><button onclick="switchView('founders')" class="hover:text-gold transition-colors">Founders & Partners</button></li>
+                        <li><button onclick="switchView('portfolio')" class="hover:text-gold transition-colors">Portfolio & Work</button></li>
+                    </ul>
+                </div>
+
+                <!-- Column 3: Services -->
+                <div>
+                    <h4 class="font-serif text-gold text-lg mb-4 font-semibold">Core Expertise</h4>
+                    <ul class="space-y-2.5 text-sm text-cream/80">
+                        <li><button onclick="switchView('services')" class="hover:text-gold transition-colors">Consulting & Advisory</button></li>
+                        <li><button onclick="switchView('services')" class="hover:text-gold transition-colors">Design & Branding</button></li>
+                        <li><button onclick="switchView('services')" class="hover:text-gold transition-colors">Trading & Sourcing</button></li>
+                        <li><button onclick="switchView('services')" class="hover:text-gold transition-colors">Business Setup & Legal</button></li>
+                        <li><button onclick="switchView('services')" class="hover:text-gold transition-colors">Technology & Systems</button></li>
+                    </ul>
+                </div>
+
+                <!-- Column 4: Contact info -->
+                <div>
+                    <h4 class="font-serif text-gold text-lg mb-4 font-semibold">Pune Office</h4>
+                    <ul class="space-y-3 text-sm text-cream/80">
+                        <li class="flex items-start gap-3">
+                            <i class="fa-solid fa-location-dot text-gold mt-1"></i>
+                            <span>Pune, Maharashtra, India</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i class="fa-solid fa-envelope text-gold"></i>
+                            <a href="mailto:omnitegra@proton.me" class="hover:text-gold transition-colors">omnitegra@proton.me</a>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i class="fa-solid fa-clock text-gold"></i>
+                            <span>Mon – Sat: 10:00 – 19:00 IST</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Bottom Copyright & Legal Links -->
+            <div class="pt-8 border-t border-gold/10 flex flex-col sm:flex-row items-center justify-between text-xs text-cream/60 gap-4">
+                <p>&copy; <span id="current-year">2026</span> Omnitegra Associates. All rights reserved.</p>
+                <div class="flex space-x-6">
+                    <button onclick="openModal('privacy')" class="hover:text-gold transition-colors">Privacy Policy</button>
+                    <button onclick="openModal('terms')" class="hover:text-gold transition-colors">Terms of Service</button>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating action buttons -->
+    <div class="fixed bottom-6 right-6 z-40 flex flex-col gap-3">
+        <a href="https://wa.me/919999999999?text=Hello%20Omnitegra%20Associates,%20I%20would%20like%20to%20discuss%20an%20engagement." target="_blank" rel="noopener" aria-label="Chat on WhatsApp" class="w-12 h-12 bg-emerald-600 hover:bg-emerald-500 text-white rounded-full shadow-lg flex items-center justify-center text-2xl transition-all hover:scale-110 group relative">
+            <i class="fa-brands fa-whatsapp"></i>
+            <span class="absolute right-14 bg-navy text-cream text-xs px-3 py-1 rounded shadow-md opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none border border-gold/30">Chat with founders</span>
+        </a>
+        <button id="back-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" aria-label="Back to top" class="w-12 h-12 bg-navy text-gold border border-gold/40 hover:bg-gold hover:text-navy rounded-full shadow-lg flex items-center justify-center text-lg transition-all opacity-0 pointer-events-none hover:scale-110">
+            <i class="fa-solid fa-arrow-up"></i>
+        </button>
+    </div>
+
+    <!-- Legal Modal -->
+    <div id="legal-modal" class="fixed inset-0 z-50 bg-navy/80 backdrop-blur-sm hidden items-center justify-center p-4">
+        <div class="bg-cream text-ink rounded-xl max-w-2xl w-full max-h-[85vh] overflow-y-auto p-6 sm:p-8 relative shadow-2xl border border-gold/30">
+            <button onclick="closeModal()" class="absolute top-4 right-4 text-muted hover:text-ink text-xl p-2"><i class="fa-solid fa-xmark"></i></button>
+            <div id="modal-content" class="space-y-4"></div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        function toggleMobileMenu() {
+            mobileMenu.classList.toggle('hidden');
+        }
+        mobileMenuBtn.addEventListener('click', toggleMobileMenu);
+
+        window.addEventListener('scroll', () => {
+            const btt = document.getElementById('back-to-top');
+            if (window.scrollY > 300) {
+                btt.classList.remove('opacity-0', 'pointer-events-none');
+            } else {
+                btt.classList.add('opacity-0', 'pointer-events-none');
+            }
+        });
+
+        const views = {
+            home: `
+                <div class="view-transition">
+                    <section class="relative bg-navy text-cream py-24 lg:py-36 overflow-hidden border-b border-gold/20">
+                        <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#C9A54B_1px,transparent_1px)] [background-size:24px_24px]"></div>
+                        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                            <div class="max-w-3xl">
+                                <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-gold/10 border border-gold/30 text-gold text-xs font-semibold tracking-widest uppercase mb-6">
+                                    <span class="w-2 h-2 rounded-full bg-gold animate-pulse"></span> Pune • Multi-Disciplinary Firm
+                                </div>
+                                <h1 class="font-serif text-4xl sm:text-6xl lg:text-7xl font-bold tracking-tight mb-6 leading-tight">
+                                    All things, <br><span class="text-gold italic font-normal">with integrity.</span>
+                                </h1>
+                                <p class="text-lg sm:text-xl text-cream/80 mb-10 font-light leading-relaxed">
+                                    Built on trust. Driven by value. Growing together. Founded by an MCA (Master of Computer Applications) and a NIFT design graduate bringing robust systems and creative mastery under one roof.
+                                </p>
+                                <div class="flex flex-col sm:flex-row gap-4">
+                                    <button onclick="switchView('services')" class="px-8 py-4 rounded-md gold-gradient text-navy font-semibold text-sm uppercase tracking-wider shadow-lg hover:opacity-95 transition-all text-center">
+                                        Explore Our Services
+                                    </button>
+                                    <button onclick="switchView('contact')" class="px-8 py-4 rounded-md bg-transparent border border-gold/50 text-cream font-semibold text-sm uppercase tracking-wider hover:bg-gold/10 transition-all text-center">
+                                        Schedule Consultation
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="bg-gold text-navy py-6 px-4">
+                        <div class="max-w-7xl mx-auto flex flex-wrap justify-center items-center gap-8 text-center font-serif text-lg sm:text-xl font-semibold">
+                            <span>✨ Built on Trust</span>
+                            <span class="hidden sm:inline">•</span>
+                            <span>🎯 Driven by Value</span>
+                            <span class="hidden sm:inline">•</span>
+                            <span>🌱 Growing Together</span>
+                        </div>
+                    </section>
+
+                    <section class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                            <div class="space-y-6">
+                                <h2 class="text-xs uppercase tracking-[0.25em] text-gold font-bold">The Omnitegra Philosophy</h2>
+                                <h3 class="font-serif text-3xl sm:text-4xl font-bold text-navy">Where rigorous systems meet visionary design.</h3>
+                                <p class="text-muted leading-relaxed">
+                                    Omnitegra Associates was born out of a simple conviction: clients shouldn’t have to run between disparate agencies for technical infrastructure and creativity. By uniting MCA technical architecture with NIFT design mastery, we provide an all-encompassing advisory and execution ecosystem.
+                                </p>
+                                <div class="grid grid-cols-2 gap-6 pt-4">
+                                    <div class="p-4 rounded-lg bg-white border border-gold/20 shadow-sm">
+                                        <h4 class="font-serif text-2xl font-bold text-navy mb-1">MCA + NIFT</h4>
+                                        <p class="text-xs text-muted">Dual Founder Expertise</p>
+                                    </div>
+                                    <div class="p-4 rounded-lg bg-white border border-gold/20 shadow-sm">
+                                        <h4 class="font-serif text-2xl font-bold text-navy mb-1">Zero Handoffs</h4>
+                                        <p class="text-xs text-muted">Direct Founder Engagement</p>
+                                    </div>
+                                </div>
+                                <div>
+                                    <button onclick="switchView('about')" class="inline-flex items-center gap-2 text-navy font-semibold hover:text-gold transition-colors pt-2">
+                                        <span>Read our complete story</span> <i class="fa-solid fa-arrow-right text-xs"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="relative">
+                                <div class="absolute -inset-4 rounded-2xl gold-gradient opacity-20 blur-lg"></div>
+                                <div class="relative rounded-xl bg-navy text-cream p-8 sm:p-10 shadow-2xl border border-gold/30">
+                                    <h4 class="font-serif text-2xl text-gold mb-4">Our Vision Statement</h4>
+                                    <blockquote class="text-cream/90 italic font-serif text-lg mb-6 leading-relaxed">
+                                        "To be the firm the world turns to when everything matters — where integrity is non-negotiable, trust is earned in every dealing, and value and growth are created for all we serve."
+                                    </blockquote>
+                                    <div class="pt-4 border-t border-gold/20 flex items-center justify-between">
+                                        <span class="text-xs tracking-widest uppercase text-gold font-semibold">Pune, Maharashtra</span>
+                                        <span class="text-xs text-cream/60">Established Founders</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="bg-navy text-cream py-24 px-4 sm:px-6 lg:px-8">
+                        <div class="max-w-7xl mx-auto">
+                            <div class="text-center max-w-2xl mx-auto mb-16">
+                                <h2 class="text-xs uppercase tracking-[0.25em] text-gold font-bold mb-3">Core Values</h2>
+                                <h3 class="font-serif text-3xl sm:text-4xl font-bold">The 5 Pillars of Omnitegra</h3>
+                            </div>
+                            <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6">
+                                <div class="bg-navy/80 border border-gold/30 rounded-xl p-6 text-center hover:border-gold transition-all">
+                                    <div class="w-12 h-12 rounded-full gold-gradient text-navy font-serif font-bold text-xl flex items-center justify-center mx-auto mb-4">1</div>
+                                    <h4 class="font-serif text-xl font-bold text-gold mb-2">Omni</h4>
+                                    <p class="text-xs text-cream/70 leading-relaxed">Every professional service under one trusted roof.</p>
+                                </div>
+                                <div class="bg-navy/80 border border-gold/30 rounded-xl p-6 text-center hover:border-gold transition-all">
+                                    <div class="w-12 h-12 rounded-full gold-gradient text-navy font-serif font-bold text-xl flex items-center justify-center mx-auto mb-4">2</div>
+                                    <h4 class="font-serif text-xl font-bold text-gold mb-2">Integrity</h4>
+                                    <p class="text-xs text-cream/70 leading-relaxed">Doing what is right, even when no one is watching.</p>
+                                </div>
+                                <div class="bg-navy/80 border border-gold/30 rounded-xl p-6 text-center hover:border-gold transition-all">
+                                    <div class="w-12 h-12 rounded-full gold-gradient text-navy font-serif font-bold text-xl flex items-center justify-center mx-auto mb-4">3</div>
+                                    <h4 class="font-serif text-xl font-bold text-gold mb-2">Trust</h4>
+                                    <p class="text-xs text-cream/70 leading-relaxed">Earned through absolute transparency and consistency.</p>
+                                </div>
+                                <div class="bg-navy/80 border border-gold/30 rounded-xl p-6 text-center hover:border-gold transition-all">
+                                    <div class="w-12 h-12 rounded-full gold-gradient text-navy font-serif font-bold text-xl flex items-center justify-center mx-auto mb-4">4</div>
+                                    <h4 class="font-serif text-xl font-bold text-gold mb-2">Value</h4>
+                                    <p class="text-xs text-cream/70 leading-relaxed">Real, measurable worth delivered in every engagement.</p>
+                                </div>
+                                <div class="bg-navy/80 border border-gold/30 rounded-xl p-6 text-center hover:border-gold transition-all md:col-span-3 lg:col-span-1">
+                                    <div class="w-12 h-12 rounded-full gold-gradient text-navy font-serif font-bold text-xl flex items-center justify-center mx-auto mb-4">5</div>
+                                    <h4 class="font-serif text-xl font-bold text-gold mb-2">Growth</h4>
+                                    <p class="text-xs text-cream/70 leading-relaxed">For clients, founders, and communities together.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+                        <div class="text-center max-w-2xl mx-auto mb-16">
+                            <h2 class="text-xs uppercase tracking-[0.25em] text-gold font-bold mb-3">Our Differentiator</h2>
+                            <h3 class="font-serif text-3xl sm:text-4xl font-bold text-navy">Why Clients Choose Omnitegra</h3>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                            <div class="bg-white p-8 rounded-xl border border-gold/20 shadow-sm">
+                                <div class="w-10 h-10 rounded-md bg-gold/10 text-gold flex items-center justify-center text-xl mb-4 font-serif">01</div>
+                                <h4 class="font-serif text-xl font-bold text-navy mb-2">Tech + Design DNA</h4>
+                                <p class="text-sm text-muted">The rare union of an MCA systems architect and a NIFT graduate. Technical precision meets breathtaking creative execution.</p>
+                            </div>
+                            <div class="bg-white p-8 rounded-xl border border-gold/20 shadow-sm">
+                                <div class="w-10 h-10 rounded-md bg-gold/10 text-gold flex items-center justify-center text-xl mb-4 font-serif">02</div>
+                                <h4 class="font-serif text-xl font-bold text-navy mb-2">True Multi-Disciplinary</h4>
+                                <p class="text-sm text-muted">From corporate setup and tech architecture to brand identity, trading, and project management — all under one trusted roof.</p>
+                            </div>
+                            <div class="bg-white p-8 rounded-xl border border-gold/20 shadow-sm">
+                                <div class="w-10 h-10 rounded-md bg-gold/10 text-gold flex items-center justify-center text-xl mb-4 font-serif">03</div>
+                                <h4 class="font-serif text-xl font-bold text-navy mb-2">Founder-Led Engagements</h4>
+                                <p class="text-sm text-muted">Zero handoffs to junior associates. Deal directly with the founders who own the outcome of your project.</p>
+                            </div>
+                            <div class="bg-white p-8 rounded-xl border border-gold/20 shadow-sm">
+                                <div class="w-10 h-10 rounded-md bg-gold/10 text-gold flex items-center justify-center text-xl mb-4 font-serif">04</div>
+                                <h4 class="font-serif text-xl font-bold text-navy mb-2">Transparent Pricing</h4>
+                                <p class="text-sm text-muted">No hidden fees or surprise billings. Scope, timelines, and deliverables are agreed upon upfront with absolute clarity.</p>
+                            </div>
+                            <div class="bg-white p-8 rounded-xl border border-gold/20 shadow-sm">
+                                <div class="w-10 h-10 rounded-md bg-gold/10 text-gold flex items-center justify-center text-xl mb-4 font-serif">05</div>
+                                <h4 class="font-serif text-xl font-bold text-navy mb-2">Global Standards</h4>
+                                <p class="text-sm text-muted">Serving clients locally in Pune and Maharashtra, pan-India, and international markets including diaspora and trade partners.</p>
+                            </div>
+                            <div class="bg-white p-8 rounded-xl border border-gold/20 shadow-sm">
+                                <div class="w-10 h-10 rounded-md bg-gold/10 text-gold flex items-center justify-center text-xl mb-4 font-serif">06</div>
+                                <h4 class="font-serif text-xl font-bold text-navy mb-2">Custom Engagements</h4>
+                                <p class="text-sm text-muted">Got a complex challenge that doesn’t fit into a standard checkbox? We thrive on bespoke multi-disciplinary problem solving.</p>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="bg-navy text-cream py-20 px-4 text-center border-t border-gold/20">
+                        <div class="max-w-4xl mx-auto space-y-6">
+                            <h3 class="font-serif text-3xl sm:text-5xl font-bold">Ready to experience integrity in action?</h3>
+                            <p class="text-cream/80 max-w-2xl mx-auto text-lg">
+                                Whether you need tech architecture, brand redesign, trade facilitation, or a complete corporate setup, we are ready.
+                            </p>
+                            <div class="pt-4">
+                                <button onclick="switchView('contact')" class="px-8 py-4 rounded-md gold-gradient text-navy font-semibold text-sm uppercase tracking-wider shadow-lg hover:opacity-95 transition-all">
+                                    Start a Conversation Today
+                                </button>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            `,
+            about: `
+                <div class="view-transition py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+                    <div class="text-center max-w-3xl mx-auto mb-16">
+                        <h2 class="text-xs uppercase tracking-[0.25em] text-gold font-bold mb-3">About Omnitegra Associates</h2>
+                        <h1 class="font-serif text-4xl sm:text-5xl font-bold text-navy mb-6">All things, with integrity.</h1>
+                        <p class="text-muted text-lg leading-relaxed">
+                            A boutique multi-disciplinary professional firm headquartered in Pune, Maharashtra, founded by an MCA and a NIFT Design Graduate.
+                        </p>
+                    </div>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-20">
+                        <div class="bg-white p-8 sm:p-10 rounded-xl border border-gold/20 shadow-sm space-y-6">
+                            <h3 class="font-serif text-2xl font-bold text-navy">The Meaning of Omnitegra</h3>
+                            <div class="space-y-4 text-muted text-sm leading-relaxed">
+                                <p><strong class="text-navy">Omni</strong> (all / everything) + <strong class="text-navy">Integra</strong> (integrity / wholeness)</p>
+                                <p class="italic text-navy font-serif text-base">"All things, with integrity."</p>
+                                <p>
+                                    Our brand promise is rooted in the belief that a firm can offer comprehensive, multidisciplinary services without ever compromising on ethical standards. We bridge the gap between technical infrastructure and creative branding under one unified roof.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="bg-navy text-cream p-8 sm:p-10 rounded-xl shadow-xl border border-gold/30 space-y-6">
+                            <h3 class="font-serif text-2xl text-gold">Mission Statement</h3>
+                            <p class="text-cream/90 leading-relaxed italic font-serif">
+                                "At Omnitegra Associates, we bring every capability under one roof and deliver it with unwavering integrity. We build lasting trust through transparency, create real value in every engagement, and grow together with our clients, our people, and our communities."
+                            </p>
+                            <div class="pt-4 border-t border-gold/20 flex justify-between items-center text-xs text-gold">
+                                <span>Pune, India</span>
+                                <span>Founder-Led Advisory</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-2xl p-8 sm:p-12 border border-gold/20 shadow-sm mb-20">
+                        <div class="max-w-3xl mx-auto text-center space-y-6">
+                            <h3 class="font-serif text-3xl font-bold text-navy">The Power of MCA + NIFT Synergy</h3>
+                            <p class="text-muted leading-relaxed">
+                                Traditional firms look strictly at paperwork; tech agencies look only at code; creative agencies focus solely on visuals. At Omnitegra, systems architecture and aesthetic execution live in harmony. Our MCA partner ensures robust digital frameworks and system efficiency, while our NIFT Design Graduate partner crafts brand narratives and product experiences that resonate globally.
+                            </p>
+                            <div class="pt-4">
+                                <button onclick="switchView('founders')" class="px-6 py-3 rounded-md gold-gradient text-navy font-semibold text-sm uppercase tracking-wider shadow-md">
+                                    Meet the Founders
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `,
+            services: `
+                <div class="view-transition py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+                    <div class="text-center max-w-3xl mx-auto mb-16">
+                        <h2 class="text-xs uppercase tracking-[0.25em] text-gold font-bold mb-3">Our Expertise</h2>
+                        <h1 class="font-serif text-4xl sm:text-5xl font-bold text-navy mb-6">Comprehensive Multidisciplinary Services</h1>
+                        <p class="text-muted text-lg leading-relaxed">
+                            One partner, zero handoffs. Explore our core service divisions designed for individuals, startups, SMEs, and international enterprises.
+                        </p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        <div class="bg-white p-8 rounded-xl border border-gold/20 shadow-sm flex flex-col justify-between hover:border-gold transition-all group">
+                            <div>
+                                <div class="w-12 h-12 rounded-lg bg-gold/10 text-gold flex items-center justify-center text-xl mb-6 group-hover:bg-gold group-hover:text-navy transition-all">
+                                    <i class="fa-solid fa-chart-line"></i>
+                                </div>
+                                <h3 class="font-serif text-2xl font-bold text-navy mb-3">Consulting & Advisory</h3>
+                                <p class="text-muted text-sm leading-relaxed mb-6">
+                                    Business strategy, financial planning, regulatory compliance, operational process design, and growth roadmaps tailored for ambitious enterprises.
+                                </p>
+                            </div>
+                            <button onclick="switchView('contact')" class="text-xs uppercase tracking-widest font-bold text-navy flex items-center gap-2 hover:text-gold transition-colors">
+                                Inquire Now <i class="fa-solid fa-arrow-right"></i>
+                            </button>
+                        </div>
+
+                        <div class="bg-white p-8 rounded-xl border border-gold/20 shadow-sm flex flex-col justify-between hover:border-gold transition-all group">
+                            <div>
+                                <div class="w-12 h-12 rounded-lg bg-gold/10 text-gold flex items-center justify-center text-xl mb-6 group-hover:bg-gold group-hover:text-navy transition-all">
+                                    <i class="fa-solid fa-pen-nib"></i>
+                                </div>
+                                <h3 class="font-serif text-2xl font-bold text-navy mb-3">Design & Branding</h3>
+                                <p class="text-muted text-sm leading-relaxed mb-6">
+                                    NIFT-led brand identities, graphic systems, product design, packaging, and high-end creative direction that builds lasting consumer affinity.
+                                </p>
+                            </div>
+                            <button onclick="switchView('contact')" class="text-xs uppercase tracking-widest font-bold text-navy flex items-center gap-2 hover:text-gold transition-colors">
+                                Inquire Now <i class="fa-solid fa-arrow-right"></i>
+                            </button>
+                        </div>
+
+                        <div class="bg-white p-8 rounded-xl border border-gold/20 shadow-sm flex flex-col justify-between hover:border-gold transition-all group">
+                            <div>
+                                <div class="w-12 h-12 rounded-lg bg-gold/10 text-gold flex items-center justify-center text-xl mb-6 group-hover:bg-gold group-hover:text-navy transition-all">
+                                    <i class="fa-solid fa-globe"></i>
+                                </div>
+                                <h3 class="font-serif text-2xl font-bold text-navy mb-3">Trading & Sourcing</h3>
+                                <p class="text-muted text-sm leading-relaxed mb-6">
+                                    End-to-end trade facilitation, domestic & international sourcing, supplier verification, quality control, and distribution management.
+                                </p>
+                            </div>
+                            <button onclick="switchView('contact')" class="text-xs uppercase tracking-widest font-bold text-navy flex items-center gap-2 hover:text-gold transition-colors">
+                                Inquire Now <i class="fa-solid fa-arrow-right"></i>
+                            </button>
+                        </div>
+
+                        <div class="bg-white p-8 rounded-xl border border-gold/20 shadow-sm flex flex-col justify-between hover:border-gold transition-all group">
+                            <div>
+                                <div class="w-12 h-12 rounded-lg bg-gold/10 text-gold flex items-center justify-center text-xl mb-6 group-hover:bg-gold group-hover:text-navy transition-all">
+                                    <i class="fa-solid fa-laptop-code"></i>
+                                </div>
+                                <h3 class="font-serif text-2xl font-bold text-navy mb-3">Technology & Systems</h3>
+                                <p class="text-muted text-sm leading-relaxed mb-6">
+                                    MCA-led software architecture, digital systems integration, tech infrastructure planning, and scalable web solutions.
+                                </p>
+                            </div>
+                            <button onclick="switchView('contact')" class="text-xs uppercase tracking-widest font-bold text-navy flex items-center gap-2 hover:text-gold transition-colors">
+                                Inquire Now <i class="fa-solid fa-arrow-right"></i>
+                            </button>
+                        </div>
+
+                        <div class="bg-white p-8 rounded-xl border border-gold/20 shadow-sm flex flex-col justify-between hover:border-gold transition-all group">
+                            <div>
+                                <div class="w-12 h-12 rounded-lg bg-gold/10 text-gold flex items-center justify-center text-xl mb-6 group-hover:bg-gold group-hover:text-navy transition-all">
+                                    <i class="fa-solid fa-building-columns"></i>
+                                </div>
+                                <h3 class="font-serif text-2xl font-bold text-navy mb-3">Business Setup</h3>
+                                <p class="text-muted text-sm leading-relaxed mb-6">
+                                    Company incorporation (LLP, Private Limited, Partnership), MSME/Udyam registrations, licenses, and hassle-free startup structuring.
+                                </p>
+                            </div>
+                            <button onclick="switchView('contact')" class="text-xs uppercase tracking-widest font-bold text-navy flex items-center gap-2 hover:text-gold transition-colors">
+                                Inquire Now <i class="fa-solid fa-arrow-right"></i>
+                            </button>
+                        </div>
+
+                        <div class="bg-white p-8 rounded-xl border border-gold/20 shadow-sm flex flex-col justify-between hover:border-gold transition-all group">
+                            <div>
+                                <div class="w-12 h-12 rounded-lg bg-gold/10 text-gold flex items-center justify-center text-xl mb-6 group-hover:bg-gold group-hover:text-navy transition-all">
+                                    <i class="fa-solid fa-diagram-project"></i>
+                                </div>
+                                <h3 class="font-serif text-2xl font-bold text-navy mb-3">Project Management</h3>
+                                <p class="text-muted text-sm leading-relaxed mb-6">
+                                    Structured planning, cross-functional team coordination, milestone tracking, and rigorous execution support for complex business initiatives.
+                                </p>
+                            </div>
+                            <button onclick="switchView('contact')" class="text-xs uppercase tracking-widest font-bold text-navy flex items-center gap-2 hover:text-gold transition-colors">
+                                Inquire Now <i class="fa-solid fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `,
+            founders: `
+                <div class="view-transition py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+                    <div class="text-center max-w-3xl mx-auto mb-16">
+                        <h2 class="text-xs uppercase tracking-[0.25em] text-gold font-bold mb-3">Leadership</h2>
+                        <h1 class="font-serif text-4xl sm:text-5xl font-bold text-navy mb-6">Founders & Partners</h1>
+                        <p class="text-muted text-lg leading-relaxed">
+                            Founded by two dynamic women leaders uniting systems architecture with creative mastery.
+                        </p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-5xl mx-auto">
+                        <!-- Partner 1 (MCA) -->
+                        <div class="bg-white rounded-2xl p-8 sm:p-10 border border-gold/20 shadow-sm flex flex-col justify-between">
+                            <div>
+                                <div class="w-20 h-20 rounded-full gold-gradient text-navy font-serif font-bold text-2xl flex items-center justify-center mb-6 shadow-md">
+                                    MCA
+                                </div>
+                                <h3 class="font-serif text-2xl font-bold text-navy mb-1">MCA Partner</h3>
+                                <p class="text-gold text-xs font-bold uppercase tracking-widest mb-6">Systems Architecture & Digital Lead</p>
+                                <p class="text-muted text-sm leading-relaxed mb-6">
+                                    Holding a Master of Computer Applications (MCA) degree, our technical partner specializes in digital infrastructure, robust software architecture, process automation, and scalable tech systems that empower modern enterprises.
+                                </p>
+                            </div>
+                            <div class="pt-6 border-t border-gold/10 flex items-center justify-between text-xs text-muted">
+                                <span>Pune, Maharashtra</span>
+                                <span class="font-semibold text-navy">Technology Specialist</span>
+                            </div>
+                        </div>
+
+                        <!-- Partner 2 (NIFT) -->
+                        <div class="bg-white rounded-2xl p-8 sm:p-10 border border-gold/20 shadow-sm flex flex-col justify-between">
+                            <div>
+                                <div class="w-20 h-20 rounded-full gold-gradient text-navy font-serif font-bold text-2xl flex items-center justify-center mb-6 shadow-md">
+                                    NIFT
+                                </div>
+                                <h3 class="font-serif text-2xl font-bold text-navy mb-1">NIFT Design Graduate Partner</h3>
+                                <p class="text-gold text-xs font-bold uppercase tracking-widest mb-6">Brand Identity & Creative Direction Lead</p>
+                                <p class="text-muted text-sm leading-relaxed mb-6">
+                                    A graduate from the prestigious National Institute of Fashion Technology (NIFT), bringing elite design thinking, brand architecture, aesthetic strategy, and consumer experience design to every client engagement.
+                                </p>
+                            </div>
+                            <div class="pt-6 border-t border-gold/10 flex items-center justify-between text-xs text-muted">
+                                <span>Pune, Maharashtra</span>
+                                <span class="font-semibold text-navy">NIFT Alumni</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `,
+            portfolio: `
+                <div class="view-transition py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+                    <div class="text-center max-w-3xl mx-auto mb-16">
+                        <h2 class="text-xs uppercase tracking-[0.25em] text-gold font-bold mb-3">Portfolio & Case Studies</h2>
+                        <h1 class="font-serif text-4xl sm:text-5xl font-bold text-navy mb-6">Proven Cross-Disciplinary Success</h1>
+                        <p class="text-muted text-lg leading-relaxed">
+                            A snapshot of how we combine technology systems, design, and strategy to transform businesses.
+                        </p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <div class="bg-white rounded-xl overflow-hidden border border-gold/20 shadow-sm flex flex-col">
+                            <div class="h-48 bg-navy p-6 flex items-center justify-center relative">
+                                <div class="absolute inset-0 opacity-20 bg-[radial-gradient(#C9A54B_1px,transparent_1px)] [background-size:16px_16px]"></div>
+                                <span class="font-serif text-gold text-xl font-bold relative z-10">Digital Platform Launch</span>
+                            </div>
+                            <div class="p-6 flex-grow flex flex-col justify-between space-y-4">
+                                <div>
+                                    <span class="text-[10px] uppercase tracking-widest font-bold text-gold">Setup + Branding + Systems</span>
+                                    <h3 class="font-serif text-xl font-bold text-navy mt-1">End-to-End Incorporation & Brand Rollout</h3>
+                                    <p class="text-muted text-xs leading-relaxed mt-2">
+                                        Complete incorporation support, technical architecture planning, and brand identity rollout for a Pune-based digital enterprise.
+                                    </p>
+                                </div>
+                                <div class="pt-4 border-t border-gold/10 flex justify-between items-center text-xs">
+                                    <span class="text-navy font-semibold">Duration: 4 Weeks</span>
+                                    <span class="text-gold font-semibold">Completed</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-white rounded-xl overflow-hidden border border-gold/20 shadow-sm flex flex-col">
+                            <div class="h-48 bg-navy p-6 flex items-center justify-center relative">
+                                <div class="absolute inset-0 opacity-20 bg-[radial-gradient(#C9A54B_1px,transparent_1px)] [background-size:16px_16px]"></div>
+                                <span class="font-serif text-gold text-xl font-bold relative z-10">Global Sourcing & Advisory</span>
+                            </div>
+                            <div class="p-6 flex-grow flex flex-col justify-between space-y-4">
+                                <div>
+                                    <span class="text-[10px] uppercase tracking-widest font-bold text-gold">Trading + Operations</span>
+                                    <h3 class="font-serif text-xl font-bold text-navy mt-1">Cross-Border Trade Structuring</h3>
+                                    <p class="text-muted text-xs leading-relaxed mt-2">
+                                        Streamlined international supplier onboarding, quality control frameworks, and workflow automation for a manufacturing enterprise.
+                                    </p>
+                                </div>
+                                <div class="pt-4 border-t border-gold/10 flex justify-between items-center text-xs">
+                                    <span class="text-navy font-semibold">Ongoing Retainer</span>
+                                    <span class="text-gold font-semibold">Active</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-white rounded-xl overflow-hidden border border-gold/20 shadow-sm flex flex-col">
+                            <div class="h-48 bg-navy p-6 flex items-center justify-center relative">
+                                <div class="absolute inset-0 opacity-20 bg-[radial-gradient(#C9A54B_1px,transparent_1px)] [background-size:16px_16px]"></div>
+                                <span class="font-serif text-gold text-xl font-bold relative z-10">Boutique Rebrand</span>
+                            </div>
+                            <div class="p-6 flex-grow flex flex-col justify-between space-y-4">
+                                <div>
+                                    <span class="text-[10px] uppercase tracking-widest font-bold text-gold">Design + Digital Presence</span>
+                                    <h3 class="font-serif text-xl font-bold text-navy mt-1">Luxury Retail Brand Architecture</h3>
+                                    <p class="text-muted text-xs leading-relaxed mt-2">
+                                        NIFT-led packaging design, flagship visual guidelines, and robust web presence for a heritage retail brand.
+                                    </p>
+                                </div>
+                                <div class="pt-4 border-t border-gold/10 flex justify-between items-center text-xs">
+                                    <span class="text-navy font-semibold">Duration: 8 Weeks</span>
+                                    <span class="text-gold font-semibold">Completed</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `,
+            blog: `
+                <div class="view-transition py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+                    <div class="text-center max-w-3xl mx-auto mb-16">
+                        <h2 class="text-xs uppercase tracking-[0.25em] text-gold font-bold mb-3">Insights & Perspectives</h2>
+                        <h1 class="font-serif text-4xl sm:text-5xl font-bold text-navy mb-6">Thought Leadership</h1>
+                        <p class="text-muted text-lg leading-relaxed">
+                            Expert commentary on technology scaling, design trends, corporate structuring, and business growth.
+                        </p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                        <div class="bg-white p-8 rounded-xl border border-gold/20 shadow-sm space-y-4">
+                            <div class="flex items-center justify-between text-xs text-muted">
+                                <span class="text-gold font-semibold uppercase tracking-widest">Tech & Infrastructure</span>
+                                <span>June 2026</span>
+                            </div>
+                            <h3 class="font-serif text-2xl font-bold text-navy">Building Scalable Digital Systems for Emerging Startups</h3>
+                            <p class="text-muted text-sm leading-relaxed">
+                                Essential strategies for early-stage founders to establish robust system architecture, prevent technical debt, and ensure seamless digital growth from day one.
+                            </p>
+                            <button onclick="switchView('contact')" class="text-xs font-bold uppercase tracking-wider text-navy hover:text-gold transition-colors pt-2">
+                                Read More & Consult <i class="fa-solid fa-arrow-right"></i>
+                            </button>
+                        </div>
+
+                        <div class="bg-white p-8 rounded-xl border border-gold/20 shadow-sm space-y-4">
+                            <div class="flex items-center justify-between text-xs text-muted">
+                                <span class="text-gold font-semibold uppercase tracking-widest">Design & Branding</span>
+                                <span>May 2026</span>
+                            </div>
+                            <h3 class="font-serif text-2xl font-bold text-navy">Why Understated Luxury Beats Flashy Marketing in B2B Advisory</h3>
+                            <p class="text-muted text-sm leading-relaxed">
+                                How NIFT-led design principles—focusing on whitespace, editorial typography, and calm authority—build deeper trust than aggressive promotional tactics.
+                            </p>
+                            <button onclick="switchView('contact')" class="text-xs font-bold uppercase tracking-wider text-navy hover:text-gold transition-colors pt-2">
+                                Read More & Consult <i class="fa-solid fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `,
+            contact: `
+                <div class="view-transition py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+                    <div class="text-center max-w-3xl mx-auto mb-16">
+                        <h2 class="text-xs uppercase tracking-[0.25em] text-gold font-bold mb-3">Get in Touch</h2>
+                        <h1 class="font-serif text-4xl sm:text-5xl font-bold text-navy mb-6">Start Your Engagement</h1>
+                        <p class="text-muted text-lg leading-relaxed">
+                            Reach out to our Pune office. Deal directly with our MCA and NIFT founders with zero runaround.
+                        </p>
+                    </div>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-5xl mx-auto">
+                        <div class="bg-white p-8 sm:p-10 rounded-2xl border border-gold/20 shadow-sm">
+                            <form id="contact-form" onsubmit="handleFormSubmit(event)" class="space-y-6">
+                                <div>
+                                    <label class="block text-xs uppercase tracking-wider font-bold text-navy mb-2">Your Full Name</label>
+                                    <input type="text" id="form-name" required class="w-full px-4 py-3 rounded-md bg-cream border border-gold/30 focus:outline-none focus:border-gold text-ink text-sm" placeholder="Aarav Sharma">
+                                </div>
+                                <div>
+                                    <label class="block text-xs uppercase tracking-wider font-bold text-navy mb-2">Email Address</label>
+                                    <input type="email" id="form-email" required class="w-full px-4 py-3 rounded-md bg-cream border border-gold/30 focus:outline-none focus:border-gold text-ink text-sm" placeholder="aarav@example.com">
+                                </div>
+                                <div>
+                                    <label class="block text-xs uppercase tracking-wider font-bold text-navy mb-2">Service of Interest</label>
+                                    <select id="form-service" class="w-full px-4 py-3 rounded-md bg-cream border border-gold/30 focus:outline-none focus:border-gold text-ink text-sm">
+                                        <option>Consulting & Advisory</option>
+                                        <option>Design & Branding</option>
+                                        <option>Trading & Sourcing</option>
+                                        <option>Technology & Systems</option>
+                                        <option>Business Setup</option>
+                                        <option>Project Management</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-xs uppercase tracking-wider font-bold text-navy mb-2">Your Message</label>
+                                    <textarea id="form-msg" rows="4" required class="w-full px-4 py-3 rounded-md bg-cream border border-gold/30 focus:outline-none focus:border-gold text-ink text-sm" placeholder="Describe your requirement..."></textarea>
+                                </div>
+                                <button type="submit" class="w-full py-4 rounded-md gold-gradient text-navy font-semibold text-sm uppercase tracking-wider shadow-md hover:opacity-95 transition-all">
+                                    Send Message to omnitegra@proton.me
+                                </button>
+                                <p id="form-success" class="hidden text-emerald-600 text-xs font-semibold text-center mt-2">
+                                    ✓ Thank you! Your message has been successfully sent. We will get back to you shortly.
+                                </p>
+                            </form>
+                        </div>
+
+                        <div class="space-y-8">
+                            <div class="bg-navy text-cream p-8 sm:p-10 rounded-2xl shadow-xl border border-gold/30 space-y-6">
+                                <h3 class="font-serif text-2xl text-gold">Direct Office Contact</h3>
+                                <ul class="space-y-4 text-sm text-cream/80">
+                                    <li class="flex items-start gap-4">
+                                        <i class="fa-solid fa-location-dot text-gold text-lg mt-0.5"></i>
+                                        <div>
+                                            <strong class="text-cream block">Location</strong>
+                                            <span>Pune, Maharashtra, India</span>
+                                        </div>
+                                    </li>
+                                    <li class="flex items-center gap-4">
+                                        <i class="fa-solid fa-envelope text-gold text-lg"></i>
+                                        <div>
+                                            <strong class="text-cream block">Primary Email</strong>
+                                            <a href="mailto:omnitegra@proton.me" class="text-gold hover:underline">omnitegra@proton.me</a>
+                                        </div>
+                                    </li>
+                                    <li class="flex items-center gap-4">
+                                        <i class="fa-solid fa-clock text-gold text-lg"></i>
+                                        <div>
+                                            <strong class="text-cream block">Working Hours</strong>
+                                            <span>Monday – Saturday: 10:00 – 19:00 IST</span>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div class="bg-white p-8 rounded-2xl border border-gold/20 shadow-sm space-y-4">
+                                <h4 class="font-serif text-xl font-bold text-navy">Quick WhatsApp Support</h4>
+                                <p class="text-muted text-sm leading-relaxed">
+                                    Need an immediate response? Connect directly with our founders on WhatsApp for urgent consultations.
+                                </p>
+                                <a href="https://wa.me/919999999999?text=Hello%20Omnitegra%20Associates" target="_blank" rel="noopener" class="inline-flex items-center gap-2 px-6 py-3 bg-emerald-600 hover:bg-emerald-500 text-white rounded-md font-semibold text-xs uppercase tracking-wider shadow-md transition-all">
+                                    <i class="fa-brands fa-whatsapp text-lg"></i> Chat on WhatsApp
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `
+        };
+
+        const legalTexts = {
+            privacy: `
+                <h3 class="font-serif text-2xl font-bold text-navy mb-4">Privacy Policy</h3>
+                <div class="space-y-3 text-sm text-muted leading-relaxed">
+                    <p>At Omnitegra Associates ("we", "our", or "us"), headquartered in Pune, Maharashtra, we respect your privacy and are committed to protecting any personal information you share with us.</p>
+                    <h4 class="font-serif text-lg font-bold text-navy pt-2">Information We Collect</h4>
+                    <p>We collect information you provide directly to us when filling out our contact form, such as your name, email address, service preference, and project messages.</p>
+                    <h4 class="font-serif text-lg font-bold text-navy pt-2">How We Use Information</h4>
+                    <p>Your information is used strictly to respond to your professional inquiries, deliver requested services, and maintain communication regarding ongoing engagements. We never sell or share your data with third parties.</p>
+                    <h4 class="font-serif text-lg font-bold text-navy pt-2">Contact</h4>
+                    <p>For any privacy-related questions, reach out to us at <a href="mailto:omnitegra@proton.me" class="text-gold font-semibold">omnitegra@proton.me</a>.</p>
+                </div>
+            `,
+            terms: `
+                <h3 class="font-serif text-2xl font-bold text-navy mb-4">Terms of Service</h3>
+                <div class="space-y-3 text-sm text-muted leading-relaxed">
+                    <p>Welcome to Omnitegra Associates. By accessing our website and engaging our multidisciplinary services, you agree to comply with and be bound by the following terms.</p>
+                    <h4 class="font-serif text-lg font-bold text-navy pt-2">Professional Engagements</h4>
+                    <p>All professional services, consultations, systems implementation, design, and advisory deliverables are governed by explicit scope agreements, timelines, and fee structures mutually agreed upon prior to project commencement.</p>
+                    <h4 class="font-serif text-lg font-bold text-navy pt-2">Intellectual Property</h4>
+                    <p>All brand assets, designs, code templates, and editorial content on this website are the property of Omnitegra Associates unless otherwise specified.</p>
+                    <h4 class="font-serif text-lg font-bold text-navy pt-2">Governing Law</h4>
+                    <p>Any legal disputes arising from engagements with Omnitegra Associates shall be subject to the exclusive jurisdiction of the courts in Pune, Maharashtra, India.</p>
+                </div>
+            `
+        };
+
+        const legalModal = document.getElementById('legal-modal');
+        const modalContent = document.getElementById('modal-content');
+        function openModal(type) {
+            modalContent.innerHTML = legalTexts[type] || '';
+            legalModal.classList.remove('hidden');
+            legalModal.classList.add('flex');
+        }
+        function closeModal() {
+            legalModal.classList.add('hidden');
+            legalModal.classList.remove('flex');
+        }
+        legalModal.addEventListener('click', (e) => {
+            if (e.target === legalModal) closeModal();
+        });
+
+        function switchView(viewName) {
+            const container = document.getElementById('app-container');
+            if (views[viewName]) {
+                container.innerHTML = views[viewName];
+                window.scrollTo({top: 0, behavior: 'smooth'});
+                
+                document.querySelectorAll('.nav-link').forEach(btn => {
+                    if (btn.getAttribute('data-nav') === viewName) {
+                        btn.classList.add('text-gold');
+                        btn.classList.remove('text-cream/90');
+                    } else {
+                        btn.classList.remove('text-gold');
+                        btn.classList.add('text-cream/90');
+                    }
+                });
+            }
+        }
+
+        function handleFormSubmit(event) {
+            event.preventDefault();
+            const successMsg = document.getElementById('form-success');
+            successMsg.classList.remove('hidden');
+            document.getElementById('contact-form').reset();
+            setTimeout(() => {
+                successMsg.classList.add('hidden');
+            }, 6000);
+        }
+
+        window.onload = function() {
+            switchView('home');
+        };
+    </script>
+</body>
+</html>
