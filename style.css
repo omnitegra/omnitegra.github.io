@@ -344,3 +344,14 @@ footer a:hover { color: var(--gold); }
   .nav ul { gap: .6rem; }
   .btn-nav { padding: .4rem .8rem; font-size: .8rem; }
 }
+/* ============ LOGO MARK (favicon in header) ============ */
+.logo {
+  display: inline-flex;
+  align-items: center;
+  gap: .6rem;
+}
+.logo-mark {
+  width: 28px;
+  height: 28px;
+  border-radius: 4px;
+}
